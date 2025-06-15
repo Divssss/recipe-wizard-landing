@@ -1,5 +1,7 @@
+
 import React from 'react';
 import { useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button"; // <-- Fix: Import Button
 
 const Hero = () => {
   const navigate = useNavigate();
@@ -60,3 +62,4 @@ const Hero = () => {
 };
 
 export default Hero;
+
