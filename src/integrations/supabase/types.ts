@@ -9,7 +9,122 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      ingredients: {
+        Row: {
+          id: string
+          image_url: string | null
+          name: string
+          nutrition: Json | null
+          type: string | null
+        }
+        Insert: {
+          id?: string
+          image_url?: string | null
+          name: string
+          nutrition?: Json | null
+          type?: string | null
+        }
+        Update: {
+          id?: string
+          image_url?: string | null
+          name?: string
+          nutrition?: Json | null
+          type?: string | null
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string | null
+          email: string | null
+          id: string
+        }
+        Insert: {
+          created_at?: string | null
+          email?: string | null
+          id: string
+        }
+        Update: {
+          created_at?: string | null
+          email?: string | null
+          id?: string
+        }
+        Relationships: []
+      }
+      recipes: {
+        Row: {
+          calories: number | null
+          description: string | null
+          id: string
+          image_url: string | null
+          ingredients: string[]
+          prep_time: number | null
+          protein: number | null
+          steps: Json | null
+          tags: string[] | null
+          title: string
+          veg_status: string | null
+        }
+        Insert: {
+          calories?: number | null
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          ingredients: string[]
+          prep_time?: number | null
+          protein?: number | null
+          steps?: Json | null
+          tags?: string[] | null
+          title: string
+          veg_status?: string | null
+        }
+        Update: {
+          calories?: number | null
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          ingredients?: string[]
+          prep_time?: number | null
+          protein?: number | null
+          steps?: Json | null
+          tags?: string[] | null
+          title?: string
+          veg_status?: string | null
+        }
+        Relationships: []
+      }
+      uploads: {
+        Row: {
+          created_at: string | null
+          detected_ingredients: string[] | null
+          id: string
+          image_url: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          detected_ingredients?: string[] | null
+          id?: string
+          image_url?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          detected_ingredients?: string[] | null
+          id?: string
+          image_url?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "uploads_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
