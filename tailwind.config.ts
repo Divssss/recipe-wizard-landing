@@ -18,7 +18,17 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+			},
 			colors: {
+				brand: {
+					DEFAULT: '#6CB37B',    // soft green
+					light: '#C6F1D6',      // pale green
+					neutral: '#F8F7F4',    // warm offwhite
+					beige: '#EDE9DD',      // beige for backgrounds & cards
+					accent: '#F6D6AE',     // warm accent color (used sparingly)
+				},
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',
