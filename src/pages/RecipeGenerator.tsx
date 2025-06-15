@@ -29,12 +29,12 @@ const RecipeGeneratorPage = () => {
       : "Suggest an easy dinner recipe";
 
     try {
+      // Updated: get the recipe from Gemini
       const aiResult = await getRecipeFromAI(prompt);
 
-      // OpenAI response: result.choices[0].message.content
-      let content = aiResult?.choices?.[0]?.message?.content ?? null;
+      let content = aiResult?.recipe ?? null;
 
-      if (!content) throw new Error("No recipe found in AI response.");
+      if (!content) throw new Error("No recipe found in Gemini AI response.");
       setRecipe(content);
 
       toast({

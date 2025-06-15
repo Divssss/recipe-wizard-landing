@@ -1,31 +1,26 @@
 
 /**
- * Calls the Supabase Edge Function to get a recipe from OpenAI given a user message.
+ * Calls the Supabase Edge Function to get a recipe from Gemini given a user message.
  * @param userPrompt e.g. "Suggest a vegan pasta recipe with lentils and broccoli"
- * @returns OpenAI API response object
+ * @returns Gemini API response object
  */
 export async function getRecipeFromAI(userPrompt: string) {
-  // Edit path to match your Supabase Edge Function deployment
+  // Call the new Gemini-based function!
   const res = await fetch(
-    "https://zgiqaxxkrkjhubsausox.supabase.co/functions/v1/get-recipe-from-gpt",
+    "https://zgiqaxxkrkjhubsausox.supabase.co/functions/v1/get-recipe-from-gemini",
     {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        // If your app is authenticated, include the user's JWT token here
       },
-      body: JSON.stringify({
-        messages: [
-          {
-            role: "system",
-            content: "You are a creative chef assistant. Respond ONLY with one recipe suggestion relevant to the user's request. Respond with detailed steps, ingredients, and nutrition if possible."
-          },
-          { role: "user", content: userPrompt }
-        ]
-      }),
+      body: JSON.stringify({ prompt: userPrompt }),
     }
   );
 
-  if (!res.ok) throw new Error("AI response failed");
-  return res.json();
+  if (!res.ok) {
+    const error = await res.json();
+    throw new Error(error?.error || "AI response failed");
+  }
+
+  return res.json(); // { recipe }
 }
